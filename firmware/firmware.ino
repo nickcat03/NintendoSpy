@@ -154,6 +154,10 @@ void read_shiftRegister( unsigned char bits )
     unsigned char *rawDataPtr = rawData;
 
     WAIT_FALLING_EDGE( latch );
+    while(PIN_READ(clock));
+    *rawDataPtr = !PIN_READ(data);
+    ++rawDataPtr;
+    bits--;
 
     do {
         WAIT_FALLING_EDGE( clock );
